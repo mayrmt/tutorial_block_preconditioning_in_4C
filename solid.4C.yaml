@@ -8,16 +8,18 @@ STRUCTURAL DYNAMIC:
   MAXTIME: 1
   MAXITER: 1
   DIVERCONT: "continue"
-  LINEAR_SOLVER: 1
+  LINEAR_SOLVER: 2
 SOLVER 1:
   SOLVER: "UMFPACK"
   NAME: "Direct Solver"
 SOLVER 2:
   SOLVER: "Belos"
-  NAME: "Direct Solver"
+  NAME: "Iterative Solver (GMRES)"
   AZOUTPUT: 1
   AZTOL: 1.0e-10
   AZITER: 100
+  AZPREC: "ILU"
+  IFPACK_XML_FILE: "solid_ifpack_ILU.xml"
 MATERIALS:
   - MAT: 1
     MAT_Struct_StVenantKirchhoff:
