@@ -1,0 +1,16 @@
+reset
+
+brick x 1 y 1 z 5
+
+volume 1 scheme map
+volume 1 size 0.05
+mesh volume 1
+
+nodeset 1 surface 1
+nodeset 1 name "surface_clamping"
+nodeset 2 surface 2
+nodeset 2 name "surface_pull"
+
+block 1 volume 1
+
+export mesh "/Users/mayr/research/codes/mayrmt_tutorial_block_preconditioning_in_4C/solid.exo" dimension 3 overwrite

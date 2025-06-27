@@ -13,6 +13,7 @@ Therefore, this tutorial will
 
 This tutorial builds upon 4C Multiphysics.
 It requires access to a build of 4C Multiphysics (newer than mid of June 2025).
+The location of the 4C Multiphysics executable will be assumed as `<4Cexe>`
 
 ## Organization of Course Material
 
