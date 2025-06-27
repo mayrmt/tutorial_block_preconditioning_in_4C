@@ -10,7 +10,7 @@ STRUCTURAL DYNAMIC:
   DIVERCONT: "continue"
   LINEAR_SOLVER: 1
 SOLVER 1:
-  SOLVER: "Umfpack"
+  SOLVER: "UMFPACK"
   NAME: "Direct Solver"
 SOLVER 2:
   SOLVER: "Belos"
