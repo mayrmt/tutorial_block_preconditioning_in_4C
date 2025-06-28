@@ -37,15 +37,6 @@ Please verify, that the simulation has finished successfully.
 1. Run the example.
 1. Observe the convergence behavior of the iterative solver.
 
-## Step 2: Iterative Solver with relaxation-based Preconditioner
-
-1. Open the `solid.4C.yaml` input file.
-1. In the list `SOLVER 1`,
-   1. change the parameter `AZPREC` to `Ifpack`.
-   1. verify that
-1. Run the example.
-1. Observe the convergence behavior of the iterative solver.
-
 ## Step 3: Iterative Solver with Incompluete-LU Factorization Preconditioner
 
 1. Open the `solid.4C.yaml` input file.

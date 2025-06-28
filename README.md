@@ -20,11 +20,10 @@ The location of the 4C Multiphysics executable will be assumed as `<4Cexe>`
 ### Part I: Solving linear systems arising in 3D elasticity
 
 - Part 1: Iterative Solver without any Preconditioner
-- Part 2: Iterative Solver with relaxation-based Preconditioners
-- Part 3: Iterative Solvers with Incomplete LU Factorization Preconditioners
-- Part 4: Iterative Solver with algebraic multigrid (MueLu) Preconditioner
+- Part 2: Iterative Solvers with Incomplete LU Factorization Preconditioners
+- Part 3: Iterative Solver with algebraic multigrid (MueLu) Preconditioner
 
 ### Part II: Solving linear systems arising in 3D fluid/solid interaction
 
-- Part 5: Iterative Solver with block-iterative preconditioner and AMG for block inverses
-- Part 6: Iterative Solver with fully coupled AMG preconditioners
+- Part 4: Iterative Solver with block-iterative preconditioner and AMG for block inverses
+- Part 5: Iterative Solver with fully coupled AMG preconditioners
