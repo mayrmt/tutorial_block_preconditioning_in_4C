@@ -28,11 +28,19 @@ To do so, use the follwoing command:
 
 Please verify, that the simulation has finished successfully.
 
-## Step 1: Iterative Solver without any Preconditioner
+## Step 0: Iterative Solver without any Preconditioner
 
-The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) without any preconditioner.
-It is defined in `SOLVER 2`.
-Switch to this solver by following these steps:
+In theory, you can run a Krylov solver without any preconditioner and it will converge in N iterations for a system with N equations.
+Since performance will be bad, 4C does not offer this option,
+and we also do not cover it in this tutorial.
+
+## Step 1: Iterative Solver with Jacobi preconditioner
+
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a relaxation preconditioner, namely `Jacobi`.
+In the input file, it is defined in `SOLVER 2`.
+The preconditioner is configured in the file `prec_solid_Jacobi.xml`.
+
+To switch to this solver, perform the following steps:
 
 1. Open the `solid.4C.yaml` input file.
 1. Familiarize yourself with the list `SOLVER 2`
