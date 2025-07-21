@@ -3,19 +3,19 @@
 The following instructions will guide you through different preconditioner options
 to solve a linear system
 
-Ax = b
+$$Ax = b$$
 
 arising from the finite element discretization of a cantilever beam using solid elements.
 
 > The exact details of the problem setup are not important for the course of this tutorial
 and, thus, are omitted for the sake of brevity.
 
-The simulation model is defined using the following files:
+The simulation model with three possible meshes is defined using the following files:
 
-- `solid.4C.yaml`
-- `solid_small.exo`
-- `solid_medium.exo`
-- `solid_large.exo`
+- `solid.4C.yaml`: simulation parameters and boundary conditions
+- `solid_small.exo`: coarse mesh
+- `solid_medium.exo`: medium mesh
+- `solid_large.exo`: fine mesh
 
 ## Preliminary Steps
 
@@ -30,12 +30,35 @@ Please verify, that the simulation has finished successfully.
 
 ## Step 1: Iterative Solver without any Preconditioner
 
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) without any preconditioner.
+It is defined in `SOLVER 2`.
+Switch to this solver by following these steps:
+
 1. Open the `solid.4C.yaml` input file.
-1. In the list `SOLVER 1`,
-   1. modify value of the parameter `SOLVER` to `Belos`.
-   1. verify that the parameter `AZPREC` is set to `None`.
-1. Run the example.
-1. Observe the convergence behavior of the iterative solver.
+1. Familiarize yourself with the list `SOLVER 2`
+1. To switch to the new solver,
+   1. find the list `STRUCTURAL DYNAMIC`,
+   1. modify the value of its parameter `LINEAR_SOLVER` to `2`.
+1. Save the file `solid.4C.yaml`
+
+Now, run the example and Observe the convergence behavior of the iterative solver.
+
+<details>
+<summary>Solution</summary>
+
+```
+STRUCTURAL DYNAMIC:
+  INT_STRATEGY: "Standard"
+  DYNAMICTYPE: "Statics"
+  TIMESTEP: 1.0
+  NUMSTEP: 1
+  MAXTIME: 1
+  MAXITER: 1
+  DIVERCONT: "continue"
+  LINEAR_SOLVER: 2
+```
+
+</details>
 
 ## Step 3: Iterative Solver with Incompluete-LU Factorization Preconditioner
 
