@@ -1,9 +1,19 @@
 reset
+undo off
+
+# {NUM_ELE_SHORT = 1}
 
 brick x 1 y 1 z 5
 
+group "short_edges" add curve 1 2 3 4 5 6 7 8
+group "long_edges" add curve 9 10 11 12
+
+curve all scheme equal
+curve in short_edges interval {NUM_ELE_SHORT}
+curve in long_edges interval {5*NUM_ELE_SHORT}
+mesh curve all
+
 volume 1 scheme map
-volume 1 size 0.05
 mesh volume 1
 
 nodeset 1 surface 1
@@ -14,3 +24,5 @@ nodeset 2 name "surface_pull"
 block 1 volume 1
 
 export mesh "/Users/mayr/research/codes/mayrmt_tutorial_block_preconditioning_in_4C/solid.exo" dimension 3 overwrite
+
+list node in volume 1 IDs
