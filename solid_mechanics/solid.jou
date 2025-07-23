@@ -23,6 +23,10 @@ nodeset 2 name "surface_pull"
 
 block 1 volume 1
 
-export mesh "/Users/mayr/research/codes/mayrmt_tutorial_block_preconditioning_in_4C/solid_mechanics/solid.exo" dimension 3 overwrite
+$ MacBook
+$ export mesh "/Users/mayr/research/codes/mayrmt_tutorial_block_preconditioning_in_4C/solid_mechanics/solid.exo" dimension 3 overwrite
+
+$ Herakles
+export mesh "/home/a11bmama/codes/tutorial_block_preconditioning_in_4C/solid_mechanics/solid.exo" dimension 3 overwrite
 
 list node in volume 1 IDs
