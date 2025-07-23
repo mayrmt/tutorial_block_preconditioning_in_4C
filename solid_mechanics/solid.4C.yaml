@@ -54,7 +54,7 @@ DESIGN SURF DIRICH CONDITIONS:
     VAL: [0.01,0.01,0.01]
     FUNCT: [null,null,null]
 STRUCTURE GEOMETRY:
-  FILE: "solid_small.exo"
+  FILE: "solid_1.exo"
   ELEMENT_BLOCKS:
     - ID: 1
       ELEMENT_NAME: SOLID
