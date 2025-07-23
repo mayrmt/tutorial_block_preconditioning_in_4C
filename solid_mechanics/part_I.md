@@ -95,9 +95,53 @@ Study the influence of the following parameters:
 
 - Mesh (to be set in `solid.4C.yaml`)
 
-  - `solid_small.exo`
-  - `solid_medium.exo`
-  - `solid_large.exo`
+  - `solid_1.exo` (for 1 MPI process)
+  - `solid_2.exo` (for 2 MPI processes)
+  - `solid_3.exo` (for 4 MPI processes)
+  - `solid_4.exo` (for 6 MPI processes)
+  - `solid_5.exo` (for 8 MPI processes)
+
+Discuss the observations with your colleagues.
+
+## Step 2: Iterative Solver with Chebyshev preconditioner
+
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a relaxation preconditioner, namely `Jacobi`.
+In the input file, it is defined in `SOLVER 2`.
+The preconditioner is configured in the file `prec_solid_Jacobi.xml`.
+
+To switch to GMRES with a Chebyshev preconditioner, set the solid linear solver to `SOLVER 3`.
+
+<details>
+<summary>Solution</summary>
+
+```
+STRUCTURAL DYNAMIC:
+  INT_STRATEGY: "Standard"
+  DYNAMICTYPE: "Statics"
+  TIMESTEP: 1.0
+  NUMSTEP: 1
+  MAXTIME: 1
+  MAXITER: 1
+  DIVERCONT: "continue"
+  LINEAR_SOLVER: 3
+```
+
+</details>
+
+Now, run the example and watch the convergence behavior of the iterative solver.
+Study the influence of the following parameters:
+
+- Configuration of the preconditioner:
+
+  - Polynomial degree: `"relaxation: sweeps"`
+
+- Mesh (to be set in `solid.4C.yaml`)
+
+  - `solid_1.exo` (for 1 MPI process)
+  - `solid_2.exo` (for 2 MPI processes)
+  - `solid_3.exo` (for 4 MPI processes)
+  - `solid_4.exo` (for 6 MPI processes)
+  - `solid_5.exo` (for 8 MPI processes)
 
 Discuss the observations with your colleagues.
 
