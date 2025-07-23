@@ -86,7 +86,7 @@ STRUCTURAL DYNAMIC:
 </details>
 
 Now, run the example and watch the convergence behavior of the iterative solver.
-Study the influence of the following parameters:
+Study the influence of the following parameters on the number of GMRES iterations until convergence:
 
 - Configuration of the preconditioner (defined in `prec_solid_ifpack_Jacobi.xml`):
 
@@ -129,7 +129,7 @@ STRUCTURAL DYNAMIC:
 </details>
 
 Now, run the example and watch the convergence behavior of the iterative solver.
-Study the influence of the following parameters:
+Study the influence of the following parameters on the number of GMRES iterations until convergence:
 
 - Configuration of the preconditioner (defined in `prec_solid_ifpack_Chebyshev.xml`):
 
@@ -162,7 +162,9 @@ In particular,
 
 1. Change the ILU settings and explore their impact on runtime and iteration numbers.
 
-## Step 4: Weak Scaling Behavior
+## Step 4: Iterative Solver with Smoothed-Aggregation Algebraic Multigrid Preconditioner
+
+## Step 5: Weak Scaling Behavior
 
 We now compare the weak scaling behavior of the different preconditioners.
 Due to its practival relevance, we study _weak scaling behavior_ [^2],
@@ -173,6 +175,27 @@ and expect a constant performance of the iterative solver.
 For the purpose of this tutorial,
 we assess the performance by the number of GMRES iterations required to reach convergence.
 For simplicity, we refrain from assessing timings in this tutorial.
+
+To assess the weak scaling behavior of a particular preconditioner, perform the following steps:
+
+1. Select a preconditioner by choosing one of the predefined `SOLVER`s in `solid.4C.yaml`.
+   1. Choose a parametrization for this preconditioner in the respective `prec_solid_*.xml` file
+(and keep it constant for the entire study)
+   1. Study one mesh
+      1. Select a mesh by setting `solid_*.exo` in the input file.
+      1. Run the example using the suitable number of MPI processes (as listed in the tables on meshing details)
+      1. Take a note of the number of GMRES iterations reqired to reach convergence
+   1. Study the next mesh (i.e., repeat step 3 with another mesh until all meshes have been computed.)
+1. Go to step 1 and select a different preconditioner
+
+> Make sure to at least cover one of the preconditioners from Ifpack and the multigrid preconditioner from MueLu.
+
+Food for thought:
+
+- How does the iteration number behave for a growing number of MPI processes and unknowns?
+- What is the main difference between the multigrid preconditioner and all the other one-level preconditioners?
+
+Discuss your finding with your colleagues.
 
 [^1]: Y. Saad. Iterative Methods for Sparse Linear Systems. SIAM, Philadelphia, PA, USA, 2003
 [^2]: J. L. Gustafson. Reevaluating Amdahl’s law. Communications of the ACM, 31(5):532–533, 1988
