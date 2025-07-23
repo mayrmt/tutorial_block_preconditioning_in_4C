@@ -18,13 +18,14 @@ The simulation model with three possible meshes is defined using the following f
 
 Meshing details:
 
-| Mesh file | #nodes x | #nodes y | #nodes z | #MPI ranks |
-|---|---|---|---|---|
-| `solid_0.exo` | 3 | 3 | 11 | 1 |
-| `solid_1.exo` | 12 | 12 | 60 | 1 |
-| `solid_2.exo` | 16 | 16 | 80 | 2 |
-| `solid_3.exo` | 20 | 20 | 100 | 4 |
-| `solid_4.exo` | 25 | 25 |125 | 8 |
+| Mesh file | #nodes x | #nodes y | #nodes z | #DOFs |  #MPI ranks |
+|---|---|---|---|---|---|
+| `solid_0.exo` | 3 | 3 | 15 | 405 | 1 |
+| `solid_1.exo` | 12 | 12 | 60 | 25920 | 1 |
+| `solid_2.exo` | 16 | 16 | 80 | 61440 | 2 |
+| `solid_3.exo` | 20 | 20 | 100 | 120000 | 4 |
+| `solid_3.exo` | 23 | 23 | 115 | 182505 | 6 |
+| `solid_5.exo` | 25 | 25 |125 | 234375 | 8 |
 
 Different preconditioners are predefined in the following files:
 
