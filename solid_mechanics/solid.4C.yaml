@@ -19,10 +19,10 @@ SOLVER 2:
   SOLVER_XML_FILE: "gmres_solid.xml"
   IFPACK_XML_FILE: "prec_solid_ifpack_Jacobi.xml"
 SOLVER 3:
-  NAME: "GMRES with Gauss-Seidel from Ifpack"
+  NAME: "GMRES with Chebyshev from Ifpack"
   SOLVER: "Belos"
   SOLVER_XML_FILE: "gmres_solid.xml"
-  IFPACK_XML_FILE: "prec_solid_ifpack_GaussSeidel.xml"
+  IFPACK_XML_FILE: "prec_solid_ifpack_Chebyshev.xml"
 SOLVER 4:
   NAME: "GMRES with ILU from Ifpack"
   SOLVER: "Belos"
