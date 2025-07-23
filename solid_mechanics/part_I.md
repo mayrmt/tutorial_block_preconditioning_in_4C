@@ -162,4 +162,17 @@ In particular,
 
 1. Change the ILU settings and explore their impact on runtime and iteration numbers.
 
+## Step 4: Weak Scaling Behavior
+
+We now compare the weak scaling behavior of the different preconditioners.
+Due to its practival relevance, we study _weak scaling behavior_ [^2],
+i.e., we increase the problem size at the same rate as the computing resources
+yielding a constant load (number of unknowns) per MPI process
+and expect a constant performance of the iterative solver.
+
+For the purpose of this tutorial,
+we assess the performance by the number of GMRES iterations required to reach convergence.
+For simplicity, we refrain from assessing timings in this tutorial.
+
 [^1]: Y. Saad. Iterative Methods for Sparse Linear Systems. SIAM, Philadelphia, PA, USA, 2003
+[^2]: J. L. Gustafson. Reevaluating Amdahl’s law. Communications of the ACM, 31(5):532–533, 1988
