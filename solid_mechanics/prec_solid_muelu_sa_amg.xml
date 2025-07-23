@@ -24,7 +24,4 @@
     <Parameter name="chebyshev: min eigenvalue" type="double" value="1.0"/>
     <Parameter name="chebyshev: zero starting solution" type="bool" value="true"/>
   </ParameterList>
-  <!-- ===========  REPARTITIONING  =========== -->
-  <Parameter name="repartition: enable" type="bool" value="true"/>
-  <Parameter name="repartition: start level" type="int" value="1"/>
 </ParameterList>
