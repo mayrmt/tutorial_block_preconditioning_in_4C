@@ -88,7 +88,7 @@ STRUCTURAL DYNAMIC:
 Now, run the example and watch the convergence behavior of the iterative solver.
 Study the influence of the following parameters:
 
-- Configuration of the preconditioner:
+- Configuration of the preconditioner (defined in `prec_solid_ifpack_Jacobi.xml`):
 
   - Number of sweeps: `"relaxation: sweeps"`
   - Number of sweeps: `"relaxation: damping factor"`
@@ -131,7 +131,7 @@ STRUCTURAL DYNAMIC:
 Now, run the example and watch the convergence behavior of the iterative solver.
 Study the influence of the following parameters:
 
-- Configuration of the preconditioner:
+- Configuration of the preconditioner (defined in `prec_solid_ifpack_Chebyshev.xml`):
 
   - Polynomial degree: `"relaxation: sweeps"`
 
