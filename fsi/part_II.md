@@ -3,10 +3,13 @@
 We now study two different multilevel block preconditioning approaches[^1] for monolithic fluid/solid interaction (FSI) solvers.
 As a test case, we use a pressure wave travelling through an elastic tube, which is often considered a standard benchmark for monolithic FSI solvers.
 
-The arising linear system of equations exhibits $3x3$ block structure, reading:
+The arising linear system of equations exhibits $3x3$ block structure, reading[^1][^2]:
 
-> Again, the exact details of the problem setup are not important for the course of this tutorial
-and, thus, are omitted for the sake of brevity.
+![3x3 Block System of a Monolithic FSI Formulation](fsi_block_system_condensed.png)
+
+> Note that a software implementation of monolithic FSI might use a different ordering of the fields.
+
+> Again, the exact details of the problem setup are not important for the course of this tutorial and, thus, are omitted for the sake of brevity.
 
 The simulation model defined using the following files:
 
@@ -23,7 +26,7 @@ They will be used and modified throughout this tutorial.
 
 ## Step 1: Block-Iterative Preconditioner
 
-We first study a block-iterative preconditioner implemented via Teko[^2]. Its configuration is given in `prec_fsi_teko_block_iterative.xml`. It is defined as `SOLVER 2` in the input file and is activated by default.
+We first study a block-iterative preconditioner implemented via Teko[^3]. Its configuration is given in `prec_fsi_teko_block_iterative.xml`. It is defined as `SOLVER 2` in the input file and is activated by default.
 
 1. Open `prec_fsi_teko_block_iterative.xml` and familiarize yourself with the file and its content.
    ><details>
@@ -76,7 +79,7 @@ We first study a block-iterative preconditioner implemented via Teko[^2]. Its co
 
 ## Step 2: Fully coupled Preconditioner
 
-Now, we switch to a fully coupled AMG preconditioner implemented in MueLu[^3]. Its configuration is given in `prec_fsi_muelu_fully_coupled_amg.xml`. It is defined as `SOLVER 3` in the input.
+Now, we switch to a fully coupled AMG preconditioner implemented in MueLu[^4]. Its configuration is given in `prec_fsi_muelu_fully_coupled_amg.xml`. It is defined as `SOLVER 3` in the input.
 
 1. Open the input file `pw.4C.yaml`.
 1. Find the section `FSI DYNAMIC/MONOLITHIC SOLVER` and set its parameter `LINEAR_SOLVER` to `3`.
@@ -108,7 +111,6 @@ You could change the following components of the preconditioner:
 Discuss the observations with your colleagues.
 
 [^1]: M. W. Gee, U. Küttler, and W. A. Wall. Truly monolithic algebraic multigrid for fluid–structure interaction. International Journal for Numerical Methods in Engineering, 85(8):987–1016, 2011
-[^2]: E. C. Cyr, J. N. Shadid, and R. S. Tuminaro. Teko: A Block Preconditioning Capability with Concrete Example Applications in Navier–Stokes and MHD. SIAM Journal on Scientific Computing, 38(5):S307–S331, 2016
-[^3]: L. Berger-Vergiat, C. A. Glusa, G. Harper, J. J. Hu, M. Mayr, A. Prokopenko, C. M. Siefert, R. S.
-Tuminaro, and T. A. Wiesner. MueLu User’s Guide. Technical Report SAND2023-12265, Sandia National
-Laboratories, Albuquerque, NM (USA) 87185, 2023
+[^2]: M. Mayr, T. Kl¨oppel, W. A. Wall, and M. W. Gee. A Temporal Consistent Monolithic Approach to Fluid–Structure Interaction Enabling Single Field Predictors. SIAM Journal on Scientific Computing, 37(1):B30–B59, 2015
+[^3]: E. C. Cyr, J. N. Shadid, and R. S. Tuminaro. Teko: A Block Preconditioning Capability with Concrete Example Applications in Navier–Stokes and MHD. SIAM Journal on Scientific Computing, 38(5):S307–S331, 2016
+[^4]: L. Berger-Vergiat, C. A. Glusa, G. Harper, J. J. Hu, M. Mayr, A. Prokopenko, C. M. Siefert, R. S. Tuminaro, and T. A. Wiesner. MueLu User’s Guide. Technical Report SAND2023-12265, Sandia National Laboratories, Albuquerque, NM (USA) 87185, 2023
