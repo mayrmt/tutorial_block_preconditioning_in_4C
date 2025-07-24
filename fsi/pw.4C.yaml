@@ -60,14 +60,14 @@ SOLVER 1:
 SOLVER 2:
   NAME: "GMRES with block-iterative FSI preconditioner from Teko"
   SOLVER: "Belos"
-  SOLVER_XML_FILE: "fsi_gmres.xml"
+  SOLVER_XML_FILE: "gmres_fsi.xml"
   AZPREC: "Teko"
   AZREUSE: 10
   TEKO_XML_FILE: "prec_fsi_teko_block_iterative.xml"
 SOLVER 3:
   NAME: "GMRES with fully coupled multigrid FSI preconditioner from MueLu"
   SOLVER: "Belos"
-  SOLVER_XML_FILE: "fsi_gmres.xml"
+  SOLVER_XML_FILE: "gmres_fsi.xml"
   AZPREC: "MueLu"
   AZREUSE: 10
   MUELU_XML_FILE: "prec_fsi_muelu_fully_coupled_amg.xml"
