@@ -212,6 +212,87 @@ Larger fill-in reduces the number of iterations, but increases the preconditione
 
 ## Step 4: Iterative Solver with Smoothed-Aggregation Algebraic Multigrid Preconditioner
 
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **smoothed aggregation algebraic multigrid preconditioner**.
+In the input file, it is defined in `SOLVER 5`.
+The preconditioner is configured in the file `prec_solid_muelu_sa_amg.xml`.
+
+To switch to GMRES with an algebraic multigrid preconditioner, set the solid `LINEAR_SOLVER` to `5`.
+
+<details>
+<summary>Solution</summary>
+
+```
+STRUCTURAL DYNAMIC:
+  INT_STRATEGY: "Standard"
+  DYNAMICTYPE: "Statics"
+  TIMESTEP: 1.0
+  NUMSTEP: 1
+  MAXTIME: 1
+  MAXITER: 1
+  DIVERCONT: "continue"
+  LINEAR_SOLVER: 4
+```
+
+</details>
+
+Now, run the example and watch the convergence behavior of the iterative solver.
+Study the influence of the following parameters on the number of GMRES iterations and/or runtime until convergence:
+
+- Configuration of the preconditioner:
+
+  - Polynomial degree of the Chebyshev level smoother: `"chebyshev: degree"`
+
+- Mesh (to be set in `solid.4C.yaml`)
+
+  - `solid_1.exo` (for 1 MPI process)
+  - `solid_2.exo` (for 2 MPI processes)
+  - `solid_3.exo` (for 4 MPI processes)
+  - `solid_4.exo` (for 6 MPI processes)
+  - `solid_5.exo` (for 8 MPI processes)
+
+Discuss the observations with your colleagues.
+
+<details>
+<summary>Expected outcome</summary>
+
+Larger polynomial degrees reduce the number of iterations.
+
+</details>
+
+If you like to investigate a different level smoother, follow the "Optional study: change the level smoother".
+
+<details>
+<summary>Optional study: change the level smoother</summary>
+
+1. Open the preconditioner configuarion `prec_solid_muelu_sa_amg.xml`
+1. Comment the list of the Chebyshev level smoother and uncomment the list of the Gauss-Seidel level smoother
+
+   ```xml
+   <!-- ===========  SMOOTHING  =========== -->
+   <!--<Parameter name="smoother: type" type="string" value="CHEBYSHEV"/>
+   <ParameterList name="smoother: params">
+     <Parameter name="chebyshev: degree" type="int" value="4"/>
+     <Parameter name="chebyshev: ratio eigenvalue" type="double" value="7"/>
+     <Parameter name="chebyshev: min eigenvalue" type="double" value="1.0"/>
+     <Parameter name="chebyshev: zero starting solution" type="bool" value="true"/>
+   </ParameterList>-->
+   <Parameter name="smoother: type" type="string" value="RELAXATION"/>
+   <ParameterList name="smoother: params">
+     <Parameter name="relaxation: type" type="string" value="Gauss-Seidel"/>
+     <Parameter name="relaxation: sweeps" type="int" value="1"/>
+     <Parameter name="relaxation: damping factor" type="double" value="1.0"/>
+   </ParameterList>
+   ```
+
+1. Run the example, study the effect of different Gauss-Seidel parameters on the number of GMRES iterations and/or runtime until convergence.
+
+Expected outcome:
+
+- More sweeps reduce the number of iterations.
+- Smaller damping values, i.e., more damping, increase the number of iterations.
+
+</details>
+
 ## Step 5: Weak Scaling Behavior
 
 We now compare the weak scaling behavior of the different preconditioners.
