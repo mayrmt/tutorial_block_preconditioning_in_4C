@@ -24,10 +24,6 @@
         <Parameter name="chebyshev: min eigenvalue" type="double" value="1.0"/>
         <Parameter name="chebyshev: zero starting solution" type="bool" value="true"/>
       </ParameterList>
-      <Parameter name="repartition: enable" type="bool" value="true"/>
-      <Parameter name="repartition: start level" type="int" value="1"/>
-      <Parameter name="repartition: remap parts" type="bool" value="false"/>
-      <Parameter name="repartition: use subcommunicators" type="bool" value="false"/>
     </ParameterList>
     <!-- ===========  SINGLE FIELD PRECONDITIONER FOR FLUID ================ -->
     <ParameterList name="Inverse2">
@@ -43,10 +39,6 @@
         <Parameter name="fact: relative threshold" type="double" value="1.0"/>
         <Parameter name="fact: relax value" type="double" value="0.0"/>
       </ParameterList>
-      <Parameter name="repartition: enable" type="bool" value="true"/>
-      <Parameter name="repartition: start level" type="int" value="1"/>
-      <Parameter name="repartition: remap parts" type="bool" value="false"/>
-      <Parameter name="repartition: use subcommunicators" type="bool" value="false"/>
     </ParameterList>
     <!-- ===========  SINGLE FIELD PRECONDITIONER FOR ALE ================ -->
     <ParameterList name="Inverse3">
@@ -60,10 +52,6 @@
         <Parameter name="chebyshev: min eigenvalue" type="double" value="1.0"/>
         <Parameter name="chebyshev: zero starting solution" type="bool" value="true"/>
       </ParameterList>
-      <Parameter name="repartition: enable" type="bool" value="true"/>
-      <Parameter name="repartition: start level" type="int" value="1"/>
-      <Parameter name="repartition: remap parts" type="bool" value="false"/>
-      <Parameter name="repartition: use subcommunicators" type="bool" value="false"/>
     </ParameterList>
   </ParameterList>
 </ParameterList>
