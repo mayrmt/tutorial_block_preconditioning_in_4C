@@ -100,6 +100,12 @@ To study the preconditioner, perform the following steps:
    ```
 
 1. Study the influence of the preconditioner configuration on the number of GMRES iterations and/or runtime  until convergence. Therefore, adapt the preconditoiner settings in `prec_fsi_teko_block_iterative.xml`.
+You could change the following components of the preconditioner:
+
+- Number of sweeps and damping parameter of the block Gauss-Seidel level smoother, cf. sublist `myBlockSmoother`
+- Smoothers for solid, fluid, ale blocks, cf. `mySmooFact1`, `mySmooFact2`, `mySmooFact3`
+
+Discuss the observations with your colleagues.
 
 [^1]: M. W. Gee, U. Küttler, and W. A. Wall. Truly monolithic algebraic multigrid for fluid–structure interaction. International Journal for Numerical Methods in Engineering, 85(8):987–1016, 2011
 [^2]: E. C. Cyr, J. N. Shadid, and R. S. Tuminaro. Teko: A Block Preconditioning Capability with Concrete Example Applications in Navier–Stokes and MHD. SIAM Journal on Scientific Computing, 38(5):S307–S331, 2016
