@@ -190,12 +190,48 @@ To assess the weak scaling behavior of a particular preconditioner, perform the 
 
 > Make sure to at least cover one of the preconditioners from Ifpack and the multigrid preconditioner from MueLu.
 
-Food for thought:
+Think about this:
 
 - How does the iteration number behave for a growing number of MPI processes and unknowns?
 - What is the main difference between the multigrid preconditioner and all the other one-level preconditioners?
 
 Discuss your finding with your colleagues.
+
+<details>
+<summary>Comparison of Weak Scaling Behavior</summary>
+
+The weak scaling behavior of the following preconditioners is compared:
+
+- Jacobi: 1 sweep with damping 1.0
+- Chebyshev: polynomial degree 3
+- ILU: fill-level 0
+- SA-AMG: V-cycle with Chebyshev polynomials of degree 2 as level smoothers
+
+To make it reproducible on a laptop or desktop workstation,
+scaling behavior is assess for 1, 2, 4, 6, and 8 MPI processes only.
+The number of iterations for each mesh and preconditioner are reported in the following figure:
+
+![Diagram to compare the weak scaling behavior of one- and multilevel preconditioners](weak_scaling_comparison/weak_scaling_diagram_all.png)
+
+For a less distored diagram, here is a plot of the same data without the Jacobi preconditioner:
+
+![Details of diagram to compare the weak scaling behavior of one- and multilevel preconditioners](weak_scaling_comparison/weak_scaling_diagram_without_jacobi.png)
+
+Here are the numbers in detail:
+
+| Procs      | 1   | 2   | 4    | 6    | 8    |
+|------------|-----|-----|------|------|------|
+| Jacobi     | 274 | 598 | 1151 | 1406 | 1667 |
+| Chebyshev  | 97  | 130 | 163  | 188  | 204  |
+| ILU        | 114 | 176 | 236  | 280  | 335  |
+| AMG        | 12  | 13  | 13   | 14   | 12   |
+
+It can clearly be seen, that
+
+1. the multigrid preconditioner outperforms all other methods by far
+1. the multigrid preconditioner is the only preconditioner with optimal weak scaling, i.e., the only one that delivers iteration numbers independent of the problem size.
+
+</details>
 
 [^1]: Y. Saad. Iterative Methods for Sparse Linear Systems. SIAM, Philadelphia, PA, USA, 2003
 [^2]: J. L. Gustafson. Reevaluating Amdahl’s law. Communications of the ACM, 31(5):532–533, 1988
