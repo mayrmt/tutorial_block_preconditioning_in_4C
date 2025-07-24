@@ -86,6 +86,51 @@ STRUCTURAL DYNAMIC:
 </details>
 
 Now, run the example and watch the convergence behavior of the iterative solver.
+
+><details>
+><summary>Where to find the number of GMRES iterations?</summary>
+>
+>For this tutorial, 4C is configured to only perform a single Newton step, such that you can really focus on the solution of a single linear system of equations. By default, the iterative solver will output residual information in every iteration.
+>
+> The setup and solution process of the linear solver produce the following output:
+>
+>```
+>*******************************************************
+>***** Belos Iterative Solver:  Pseudo Block Gmres
+>***** Maximum Iterations: 2000
+>***** Block Size: 1
+>***** Status tests:
+>   Failed.......OR Combination ->
+>     OK...........Number of Iterations = 0 < 2000
+>     Unconverged..(2-Norm Res Vec) / (2-Norm Prec Res0)
+>                  residual [ 0 ] = 1.000000e+00 > 1.000000e-10
+>
+>*******************************************************
+>           [ 1] :    IMPLICIT RES
+>Iter    0, [ 1] :    1.000000e+00
+>Iter    1, [ 1] :    2.987968e-02
+>Iter    2, [ 1] :    4.747745e-03
+>Iter    3, [ 1] :    4.079741e-04
+>Iter    4, [ 1] :    5.292770e-05
+>Iter    5, [ 1] :    9.309950e-06
+>Iter    6, [ 1] :    1.418433e-06
+>Iter    7, [ 1] :    2.224382e-07
+>Iter    8, [ 1] :    3.003654e-08
+>Iter    9, [ 1] :    3.225869e-09
+>Iter   10, [ 1] :    3.924956e-10
+>Iter   11, [ 1] :    4.445936e-11
+>```
+>
+> The linear solver tolerance is set to `1e-10`, such that the line
+>
+> ```
+> Iter   11, [ 1] :    4.445936e-11
+>```
+>
+> shows the last iteration of the linear solver.
+> From there, you can conlude that the linear solver required 11 iterations until convergence.
+></details>
+
 Study the influence of the following parameters on the number of GMRES iterations and/or runtime  until convergence:
 
 - Configuration of the preconditioner:
