@@ -141,7 +141,7 @@ Study the influence of the following parameters on the number of GMRES iteration
 
 - Configuration of the preconditioner:
 
-  - Polynomial degree: `"relaxation: sweeps"`
+  - Polynomial degree: `"chebyshev: degree"`
 
 - Mesh (to be set in `solid.4C.yaml`)
 
