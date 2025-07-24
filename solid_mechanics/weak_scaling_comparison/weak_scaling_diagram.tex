@@ -1,0 +1,61 @@
+\documentclass[tikz,border=2mm]{standalone}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage{pgfplotstable}
+
+\usepackage{xcolor}
+\definecolor{colUniBwOrange}{RGB}{238,114,3} % Orange by UniBw M
+\definecolor{colUniBwGray}{RGB}{113,112,114} % Gray by UniBw M
+\definecolor{colTum}{rgb}{0.0,0.396,0.741} % TUM blue
+\definecolor{colDarkGreen}{HTML}{43972A}
+
+\begin{document}
+
+\begin{tikzpicture}
+\pgfplotstableread{weak_scaling_comparison.data}\scalingdata
+
+\begin{axis}[
+    title={Weak Scaling Behavior of Different Preconditioners},
+    xlabel={MPI processes},
+    ylabel={GMRES Iterations},
+    grid=major,
+    legend pos=north west,
+    mark options={solid},
+    thick
+]
+
+% Jacobi
+\addplot[
+    mark=*,
+    color=red
+] table[x=Procs, y=Jacobi] from \scalingdata;
+\addlegendentry{Jacobi}
+
+% Chebyshev
+\addplot[
+    mark=square*,
+    color=colTum
+] table[x=Procs, y=Chebyshev] {\scalingdata};
+\addlegendentry{Chebyshev}
+
+% ILU
+\addplot[
+    mark=triangle*,
+    color=green!60!black
+] table[x=Procs, y=ILU] {\scalingdata};
+\addlegendentry{ILU}
+
+% AMG
+\addplot[
+    mark=diamond*,
+    color=colUniBwOrange
+] table[x=Procs, y=AMG] {\scalingdata};
+\addlegendentry{AMG}
+
+\end{axis}
+
+\end{tikzpicture}
+
+\end{document}
+
