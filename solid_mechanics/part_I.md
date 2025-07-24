@@ -215,7 +215,7 @@ Larger fill-in reduces the number of iterations, but increases the preconditione
 ## Step 5: Weak Scaling Behavior
 
 We now compare the weak scaling behavior of the different preconditioners.
-Due to its practival relevance, we study _weak scaling behavior_ [^2],
+Due to its practical relevance, we study *weak scaling behavior* [^2],
 i.e., we increase the problem size at the same rate as the computing resources
 yielding a constant load (number of unknowns) per MPI process
 and expect a constant performance of the iterative solver.
