@@ -55,11 +55,11 @@ and we also do not cover it in this tutorial.
 
 ## Step 1: Iterative Solver with Jacobi preconditioner
 
-The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a relaxation preconditioner, namely `Jacobi`.
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **relaxation preconditioner**, namely **Jacobi's method**.
 In the input file, it is defined in `SOLVER 2`.
 The preconditioner is configured in the file `prec_solid_Jacobi.xml`.
 
-To switch to this solver, perform the following steps:
+To switch to GMRES with a Jacobi preconditioner, set the solid `LINEAR_SOLVER` to `2`.
 
 1. Open the `solid.4C.yaml` input file.
 1. Familiarize yourself with the list `SOLVER 2` and the file `prec_solid_Jacobi.xml`.
@@ -86,9 +86,9 @@ STRUCTURAL DYNAMIC:
 </details>
 
 Now, run the example and watch the convergence behavior of the iterative solver.
-Study the influence of the following parameters on the number of GMRES iterations until convergence:
+Study the influence of the following parameters on the number of GMRES iterations and/or runtime  until convergence:
 
-- Configuration of the preconditioner (defined in `prec_solid_ifpack_Jacobi.xml`):
+- Configuration of the preconditioner:
 
   - Number of sweeps: `"relaxation: sweeps"`
   - Number of sweeps: `"relaxation: damping factor"`
@@ -103,13 +103,21 @@ Study the influence of the following parameters on the number of GMRES iteration
 
 Discuss the observations with your colleagues.
 
+<details>
+<summary>Expected outcome</summary>
+
+- More sweeps reduce the number of iterations.
+- Smaller damping values, i.e., more damping, increase the number of iterations.
+
+</details>
+
 ## Step 2: Iterative Solver with Chebyshev preconditioner
 
-The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a relaxation preconditioner, namely `Jacobi`.
-In the input file, it is defined in `SOLVER 2`.
-The preconditioner is configured in the file `prec_solid_Jacobi.xml`.
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **polynomial preconditioner** using **Chebyshev polynomials**.
+In the input file, it is defined in `SOLVER 3`.
+The preconditioner is configured in the file `prec_solid_chebyshev.xml`.
 
-To switch to GMRES with a Chebyshev preconditioner, set the solid linear solver to `SOLVER 3`.
+To switch to GMRES with a Chebyshev preconditioner, set the solid `LINEAR_SOLVER` to `3`.
 
 <details>
 <summary>Solution</summary>
@@ -129,9 +137,9 @@ STRUCTURAL DYNAMIC:
 </details>
 
 Now, run the example and watch the convergence behavior of the iterative solver.
-Study the influence of the following parameters on the number of GMRES iterations until convergence:
+Study the influence of the following parameters on the number of GMRES iterations and/or runtime  until convergence:
 
-- Configuration of the preconditioner (defined in `prec_solid_ifpack_Chebyshev.xml`):
+- Configuration of the preconditioner:
 
   - Polynomial degree: `"relaxation: sweeps"`
 
@@ -145,22 +153,62 @@ Study the influence of the following parameters on the number of GMRES iteration
 
 Discuss the observations with your colleagues.
 
+<details>
+<summary>Expected outcome</summary>
+
+Larger polynomial degrees reduce the number of iterations.
+
+</details>
+
 ## Step 3: Iterative Solver with Incompluete-LU Factorization Preconditioner
 
-1. Open the `solid.4C.yaml` input file.
-1. In the list `SOLVER 1`,
-   1. change the parameter `AZPREC` to `Ifpack`.
-   1. change the parameter `IFPACK_XML_FILE` to `solid_ifpack_ILU.xml`.
-1. Run the example.
-1. Observe the convergence behavior of the iterative solver.
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with an **incomplete LU factorization (ILU) preconditioner**.
+In the input file, it is defined in `SOLVER 4`.
+The preconditioner is configured in the file `prec_solid_ifpack_ILU.xml`.
 
-You can modify the settings of the ILU preconditioner by changing the file `solid_ifpack_ILU.xml`.
-In particular,
+To switch to GMRES with an ILU preconditioner, set the solid `LINEAR_SOLVER` to `4`.
 
-- `Overlap` defines the overlap at processor boundaries (`0` = no overlap, larger values results in larger overlap)
-- `fact: level-of-fill` defines the allowed fill-in (larger values result in a better approximation, however a more expensice setup procedure)
+<details>
+<summary>Solution</summary>
 
-1. Change the ILU settings and explore their impact on runtime and iteration numbers.
+```
+STRUCTURAL DYNAMIC:
+  INT_STRATEGY: "Standard"
+  DYNAMICTYPE: "Statics"
+  TIMESTEP: 1.0
+  NUMSTEP: 1
+  MAXTIME: 1
+  MAXITER: 1
+  DIVERCONT: "continue"
+  LINEAR_SOLVER: 4
+```
+
+</details>
+
+Now, run the example and watch the convergence behavior of the iterative solver.
+Study the influence of the following parameters on the number of GMRES iterations and/or runtime until convergence:
+
+- Configuration of the preconditioner:
+
+  - Overlap at processor boundaries: `"Overlap"` defines the overlap at processor boundaries (`0` = no overlap, larger values results in larger overlap)
+  - Fill-in: `"fact: level-of-fill"` defines the allowed fill-in (larger values result in a better approximation, however a more expensice setup procedure)
+
+- Mesh (to be set in `solid.4C.yaml`)
+
+  - `solid_1.exo` (for 1 MPI process)
+  - `solid_2.exo` (for 2 MPI processes)
+  - `solid_3.exo` (for 4 MPI processes)
+  - `solid_4.exo` (for 6 MPI processes)
+  - `solid_5.exo` (for 8 MPI processes)
+
+Discuss the observations with your colleagues.
+
+<details>
+<summary>Expected outcome</summary>
+
+Larger fill-in reduces the number of iterations, but increases the preconditioner setup time.
+
+</details>
 
 ## Step 4: Iterative Solver with Smoothed-Aggregation Algebraic Multigrid Preconditioner
 
