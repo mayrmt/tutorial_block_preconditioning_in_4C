@@ -1,7 +1,6 @@
 # Block preconditioning of monolithic FSI solvers
 
-We now study two different multilevel block preconditioning approaches[^1] for monolithic fluid/solid interaction (FSI) solvers.
-As a test case, we use a pressure wave travelling through an elastic tube, which is often considered a standard benchmark for monolithic FSI solvers.
+We now study two different multilevel block preconditioning approaches[^1] for monolithic fluid/solid interaction (FSI) solvers. As a test case, we use a pressure wave travelling through an elastic tube, which is often considered a standard benchmark for monolithic FSI solvers.
 
 The arising linear system of equations exhibits $3x3$ block structure, reading[^1][^2]:
 
@@ -102,8 +101,7 @@ To study the preconditioner, perform the following steps:
    mpirun -np 2 <4Cexe> pw.4C.yaml output
    ```
 
-1. Study the influence of the preconditioner configuration on the number of GMRES iterations and/or runtime  until convergence. Therefore, adapt the preconditoiner settings in `prec_fsi_teko_block_iterative.xml`.
-You could change the following components of the preconditioner:
+1. Study the influence of the preconditioner configuration on the number of GMRES iterations and/or runtime  until convergence. Therefore, adapt the preconditoiner settings in `prec_fsi_teko_block_iterative.xml`. You could change the following components of the preconditioner:
 
 - Number of sweeps and damping parameter of the block Gauss-Seidel level smoother, cf. sublist `myBlockSmoother`
 - Smoothers for solid, fluid, ale blocks, cf. `mySmooFact1`, `mySmooFact2`, `mySmooFact3`

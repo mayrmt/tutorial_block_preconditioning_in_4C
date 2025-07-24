@@ -1,14 +1,12 @@
 # Solving linear systems arising from 3D elasticity
 
-The following instructions will guide you through different preconditioner options
-to solve a linear system
+The following instructions will guide you through different preconditioner options to solve a linear system
 
 $$Ax = b$$
 
 arising from the finite element discretization of a cantilever beam using solid elements.
 
-> The exact details of the problem setup are not important for the course of this tutorial
-and, thus, are omitted for the sake of brevity.
+> The exact details of the problem setup are not important for the course of this tutorial and, thus, are omitted for the sake of brevity.
 
 The simulation model with three possible meshes is defined using the following files:
 
@@ -38,8 +36,7 @@ They will be used and modified throughout this tutorial.
 
 ## Preliminary Steps
 
-The default intput file comes with a direct solver, so you can run it right away.
-To run it on `<numProc> MPI ranks, use the following command:
+The default intput file comes with a direct solver, so you can run it right away. To run it on `<numProc> MPI ranks, use the following command:
 
 ```bash
 mpirun -np <numProcs> <4Cexe> solid.4C.yaml output
@@ -49,15 +46,11 @@ Please verify, that the simulation has finished successfully.
 
 ## Step 0: Iterative Solver without any Preconditioner
 
-In theory, you can run a Krylov solver without any preconditioner and it will converge in $N$ iterations for a system with $N$ equations.
-Since unpreconditioned Krylov solvers are know to deliver bad performance [^1], 4C does not offer this option,
-and we also do not cover it in this tutorial.
+In theory, you can run a Krylov solver without any preconditioner and it will converge in $N$ iterations for a system with $N$ equations. Since unpreconditioned Krylov solvers are know to deliver bad performance [^1], 4C does not offer this option, and we also do not cover it in this tutorial.
 
 ## Step 1: Iterative Solver with Jacobi preconditioner
 
-The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **relaxation preconditioner**, namely **Jacobi's method**.
-In the input file, it is defined in `SOLVER 2`.
-The preconditioner is configured in the file `prec_solid_Jacobi.xml`.
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **relaxation preconditioner**, namely **Jacobi's method**. In the input file, it is defined in `SOLVER 2`. The preconditioner is configured in the file `prec_solid_Jacobi.xml`.
 
 To switch to GMRES with a Jacobi preconditioner, set the solid `LINEAR_SOLVER` to `2`.
 
@@ -127,8 +120,7 @@ Now, run the example and watch the convergence behavior of the iterative solver.
 > Iter   11, [ 1] :    4.445936e-11
 >```
 >
-> shows the last iteration of the linear solver.
-> From there, you can conlude that the linear solver required 11 iterations until convergence.
+> shows the last iteration of the linear solver. From there, you can conlude that the linear solver required 11 iterations until convergence.
 ></details>
 
 Study the influence of the following parameters on the number of GMRES iterations and/or runtime  until convergence:
@@ -158,9 +150,7 @@ Discuss the observations with your colleagues.
 
 ## Step 2: Iterative Solver with Chebyshev preconditioner
 
-The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **polynomial preconditioner** using **Chebyshev polynomials**.
-In the input file, it is defined in `SOLVER 3`.
-The preconditioner is configured in the file `prec_solid_chebyshev.xml`.
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **polynomial preconditioner** using **Chebyshev polynomials**. In the input file, it is defined in `SOLVER 3`. The preconditioner is configured in the file `prec_solid_chebyshev.xml`.
 
 To switch to GMRES with a Chebyshev preconditioner, set the solid `LINEAR_SOLVER` to `3`.
 
@@ -181,8 +171,7 @@ STRUCTURAL DYNAMIC:
 
 </details>
 
-Now, run the example and watch the convergence behavior of the iterative solver.
-Study the influence of the following parameters on the number of GMRES iterations and/or runtime  until convergence:
+Now, run the example and watch the convergence behavior of the iterative solver. Study the influence of the following parameters on the number of GMRES iterations and/or runtime  until convergence:
 
 - Configuration of the preconditioner:
 
@@ -207,9 +196,7 @@ Larger polynomial degrees reduce the number of iterations.
 
 ## Step 3: Iterative Solver with Incompluete-LU Factorization Preconditioner
 
-The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with an **incomplete LU factorization (ILU) preconditioner**.
-In the input file, it is defined in `SOLVER 4`.
-The preconditioner is configured in the file `prec_solid_ifpack_ILU.xml`.
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with an **incomplete LU factorization (ILU) preconditioner**. In the input file, it is defined in `SOLVER 4`. The preconditioner is configured in the file `prec_solid_ifpack_ILU.xml`.
 
 To switch to GMRES with an ILU preconditioner, set the solid `LINEAR_SOLVER` to `4`.
 
@@ -230,8 +217,7 @@ STRUCTURAL DYNAMIC:
 
 </details>
 
-Now, run the example and watch the convergence behavior of the iterative solver.
-Study the influence of the following parameters on the number of GMRES iterations and/or runtime until convergence:
+Now, run the example and watch the convergence behavior of the iterative solver. Study the influence of the following parameters on the number of GMRES iterations and/or runtime until convergence:
 
 - Configuration of the preconditioner:
 
@@ -257,9 +243,7 @@ Larger fill-in reduces the number of iterations, but increases the preconditione
 
 ## Step 4: Iterative Solver with Smoothed-Aggregation Algebraic Multigrid Preconditioner
 
-The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **smoothed aggregation algebraic multigrid preconditioner**.
-In the input file, it is defined in `SOLVER 5`.
-The preconditioner is configured in the file `prec_solid_muelu_sa_amg.xml`.
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **smoothed aggregation algebraic multigrid preconditioner**. In the input file, it is defined in `SOLVER 5`. The preconditioner is configured in the file `prec_solid_muelu_sa_amg.xml`.
 
 To switch to GMRES with an algebraic multigrid preconditioner, set the solid `LINEAR_SOLVER` to `5`.
 
@@ -280,8 +264,7 @@ STRUCTURAL DYNAMIC:
 
 </details>
 
-Now, run the example and watch the convergence behavior of the iterative solver.
-Study the influence of the following parameters on the number of GMRES iterations and/or runtime until convergence:
+Now, run the example and watch the convergence behavior of the iterative solver. Study the influence of the following parameters on the number of GMRES iterations and/or runtime until convergence:
 
 - Configuration of the preconditioner:
 
@@ -340,15 +323,9 @@ Expected outcome:
 
 ## Step 5: Weak Scaling Behavior
 
-We now compare the weak scaling behavior of the different preconditioners.
-Due to its practical relevance, we study *weak scaling behavior* [^2],
-i.e., we increase the problem size at the same rate as the computing resources
-yielding a constant load (number of unknowns) per MPI process
-and expect a constant performance of the iterative solver.
+We now compare the weak scaling behavior of the different preconditioners. Due to its practical relevance, we study *weak scaling behavior* [^2], i.e., we increase the problem size at the same rate as the computing resources yielding a constant load (number of unknowns) per MPI process and expect a constant performance of the iterative solver.
 
-For the purpose of this tutorial,
-we assess the performance by the number of GMRES iterations required to reach convergence.
-For simplicity, we refrain from assessing timings in this tutorial.
+For the purpose of this tutorial, we assess the performance by the number of GMRES iterations required to reach convergence. For simplicity, we refrain from assessing timings in this tutorial.
 
 To assess the weak scaling behavior of a particular preconditioner, perform the following steps:
 
@@ -381,9 +358,7 @@ The weak scaling behavior of the following preconditioners is compared:
 - ILU: fill-level 0
 - SA-AMG: V-cycle with Chebyshev polynomials of degree 2 as level smoothers
 
-To make it reproducible on a laptop or desktop workstation,
-scaling behavior is assess for 1, 2, 4, 6, and 8 MPI processes only.
-The number of iterations for each mesh and preconditioner are reported in the following figure:
+To make it reproducible on a laptop or desktop workstation, scaling behavior is assess for 1, 2, 4, 6, and 8 MPI processes only. The number of iterations for each mesh and preconditioner are reported in the following figure:
 
 ![Diagram to compare the weak scaling behavior of one- and multilevel preconditioners](weak_scaling_comparison/weak_scaling_diagram_all.png)
 
