@@ -335,7 +335,8 @@ To assess the weak scaling behavior of a particular preconditioner, perform the 
    1. Choose a parametrization for this preconditioner in the respective `prec_solid_*.xml` file (and keep it constant for the entire study)
    1. Study one mesh
       1. Select a mesh by setting `solid_*.exo` in the input file.
-      1. Run the example using the suitable number of MPI processes (as listed in the tables on meshing details)
+      1. Run the example using the suitable number of MPI processes 
+      (as listed in the tables on meshing details)
       1. Take a note of the number of GMRES iterations required to reach convergence
    1. Study the next mesh (i.e., repeat step ii with another mesh until all meshes have been computed.)
 1. Go to step 1 and select a different preconditioner
