@@ -10,7 +10,7 @@ arising from the finite element discretization of a cantilever beam using solid 
 
 The simulation model with three possible meshes is defined using the following files:
 
-- `solid.4C.yaml`: simulation parameters and boundary conditions for clamped cantilever beam with endload performing a single solve of the linear sytem
+- `solid.4C.yaml`: simulation parameters and boundary conditions for clamped cantilever beam with endload performing a single solve of the linear system
 - `gmres_solid.xml`: definition of a GMRES solver from Belos (required for iterative solvers throughout the tutorial)
 - a series of mesh files `solid_*.exo` to change the size of the linear system to be solved (see table with meshing details)
 
