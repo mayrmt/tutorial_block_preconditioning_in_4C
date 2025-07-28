@@ -12,7 +12,7 @@ The arising linear system of equations exhibits $3x3$ block structure, reading[^
 
 The simulation model defined uses the following files:
 
-- `pw.4C.yaml`: simulation parameters and boundary conditions for clamped cantilever beam with endload performing a single solve of the linear sytem
+- `pw.4C.yaml`: simulation parameters and boundary conditions for a pressure wave travelling through an elastic tube
 - `gmres_fsi.xml`: definition of a GMRES solver from Belos (required for iterative solvers throughout the tutorial)
 - `pw.exo`: mesh in binary format
 
