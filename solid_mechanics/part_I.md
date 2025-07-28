@@ -36,7 +36,7 @@ They will be used and modified throughout this tutorial.
 
 ## Preliminary Steps
 
-The default intput file comes with a direct solver, so you can run it right away. To run it on `<numProc> MPI ranks, use the following command:
+The default input file comes with a direct solver, so you can run it right away. To run it on `<numProc>` MPI ranks, use the following command:
 
 ```bash
 mpirun -np <numProcs> <4Cexe> solid.4C.yaml output
@@ -46,16 +46,16 @@ Please verify, that the simulation has finished successfully.
 
 ## Step 0: Iterative Solver without any Preconditioner
 
-In theory, you can run a Krylov solver without any preconditioner and it will converge in $N$ iterations for a system with $N$ equations. Since unpreconditioned Krylov solvers are know to deliver bad performance [^1], 4C does not offer this option, and we also do not cover it in this tutorial.
+In theory, you can run a Krylov solver without any preconditioner and it will converge in $N$ iterations for a system with $N$ equations. Since unpreconditioned Krylov solvers are known to deliver bad performance [^1], 4C does not offer this option, and we also do not cover it in this tutorial.
 
 ## Step 1: Iterative Solver with Jacobi preconditioner
 
-The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **relaxation preconditioner**, namely **Jacobi's method**. In the input file, it is defined in `SOLVER 2`. The preconditioner is configured in the file `prec_solid_Jacobi.xml`.
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **relaxation preconditioner**, namely **Jacobi's method**. In the input file, it is defined in `SOLVER 2`. The preconditioner is configured in the file `prec_solid_ifpack_Jacobi.xml`.
 
 To switch to GMRES with a Jacobi preconditioner, set the solid `LINEAR_SOLVER` to `2`.
 
 1. Open the `solid.4C.yaml` input file.
-1. Familiarize yourself with the list `SOLVER 2` and the file `prec_solid_Jacobi.xml`.
+1. Familiarize yourself with the list `SOLVER 2` and the file `prec_solid_ifpack_Jacobi.xml`.
 1. To switch to the new solver,
    1. find the list `STRUCTURAL DYNAMIC`,
    1. modify the value of its parameter `LINEAR_SOLVER` to `2`.
@@ -120,7 +120,7 @@ Now, run the example and watch the convergence behavior of the iterative solver.
 > Iter   11, [ 1] :    4.445936e-11
 >```
 >
-> shows the last iteration of the linear solver. From there, you can conlude that the linear solver required 11 iterations until convergence.
+> shows the last iteration of the linear solver. From there, you can conclude that the linear solver required 11 iterations until convergence.
 ></details>
 
 Study the influence of the following parameters on the number of GMRES iterations and/or runtime  until convergence:
@@ -150,7 +150,7 @@ Discuss the observations with your colleagues.
 
 ## Step 2: Iterative Solver with Chebyshev preconditioner
 
-The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **polynomial preconditioner** using **Chebyshev polynomials**. In the input file, it is defined in `SOLVER 3`. The preconditioner is configured in the file `prec_solid_chebyshev.xml`.
+The `solid.4C.yaml` input file comes with a pre-configured iterative solver (GMRES) with a **polynomial preconditioner** using **Chebyshev polynomials**. In the input file, it is defined in `SOLVER 3`. The preconditioner is configured in the file `prec_solid_ifpack_Chebyshev.xml`.
 
 To switch to GMRES with a Chebyshev preconditioner, set the solid `LINEAR_SOLVER` to `3`.
 
@@ -222,7 +222,7 @@ Now, run the example and watch the convergence behavior of the iterative solver.
 - Configuration of the preconditioner:
 
   - Overlap at processor boundaries: `"Overlap"` defines the overlap at processor boundaries (`0` = no overlap, larger values results in larger overlap)
-  - Fill-in: `"fact: level-of-fill"` defines the allowed fill-in (larger values result in a better approximation, however a more expensice setup procedure)
+  - Fill-in: `"fact: level-of-fill"` defines the allowed fill-in (larger values result in a better approximation, however a more expensive setup procedure)
 
 - Mesh (to be set in `solid.4C.yaml`)
 
@@ -259,7 +259,7 @@ STRUCTURAL DYNAMIC:
   MAXTIME: 1
   MAXITER: 1
   DIVERCONT: "continue"
-  LINEAR_SOLVER: 4
+  LINEAR_SOLVER: 5
 ```
 
 </details>
@@ -314,10 +314,12 @@ If you like to investigate a different level smoother, follow the "Optional stud
 
 1. Run the example, study the effect of different Gauss-Seidel parameters on the number of GMRES iterations and/or runtime until convergence.
 
-Expected outcome:
+<details>
+<summary>Expected outcome:</summary>
 
 - More sweeps reduce the number of iterations.
 - Smaller damping values, i.e., more damping, increase the number of iterations.
+</details>
 
 </details>
 
@@ -330,13 +332,12 @@ For the purpose of this tutorial, we assess the performance by the number of GMR
 To assess the weak scaling behavior of a particular preconditioner, perform the following steps:
 
 1. Select a preconditioner by choosing one of the predefined `SOLVER`s in `solid.4C.yaml`.
-   1. Choose a parametrization for this preconditioner in the respective `prec_solid_*.xml` file
-(and keep it constant for the entire study)
+   1. Choose a parametrization for this preconditioner in the respective `prec_solid_*.xml` file (and keep it constant for the entire study)
    1. Study one mesh
       1. Select a mesh by setting `solid_*.exo` in the input file.
       1. Run the example using the suitable number of MPI processes (as listed in the tables on meshing details)
-      1. Take a note of the number of GMRES iterations reqired to reach convergence
-   1. Study the next mesh (i.e., repeat step 3 with another mesh until all meshes have been computed.)
+      1. Take a note of the number of GMRES iterations required to reach convergence
+   1. Study the next mesh (i.e., repeat step ii with another mesh until all meshes have been computed.)
 1. Go to step 1 and select a different preconditioner
 
 > Make sure to at least cover one of the preconditioners from Ifpack and the multigrid preconditioner from MueLu.
