@@ -10,7 +10,7 @@ The arising linear system of equations exhibits $3x3$ block structure, reading[^
 
 > Again, the exact details of the problem setup are not important for the course of this tutorial and, thus, are omitted for the sake of brevity.
 
-The simulation model defined uses the following files:
+The simulation model is defined using the following files:
 
 - `pw.4C.yaml`: simulation parameters and boundary conditions for a pressure wave travelling through an elastic tube
 - `gmres_fsi.xml`: definition of a GMRES solver from Belos (required for iterative solvers throughout the tutorial)
