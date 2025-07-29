@@ -33,3 +33,10 @@ Tutorial steps are described in `fsi/part_II.md`. The tutorial consists of the f
 
 - Step 1: Iterative Solver with block-iterative preconditioner and AMG for block inverses
 - Step 2: Iterative Solver with fully coupled AMG preconditioners
+
+## Contributors
+
+In alphabetical order:
+
+- Bühler, Regina ([@reginabuehler](https://github.com/reginabuehler))
+- Mayr, Matthias ([@mayrmt](https://github.com/mayrmt))
