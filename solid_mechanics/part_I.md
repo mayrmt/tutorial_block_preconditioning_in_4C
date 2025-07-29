@@ -34,6 +34,14 @@ Different preconditioners are predefined in the following files:
 
 They will be used and modified throughout this tutorial.
 
+><details>
+><summary>Remark: choice of input parameters</summary>
+>
+>Since this tutorial focuses on preconditioning of the linear solver, we are not really interested in solving an actual solid mechanics problem, but only want to solve a single linear system arising from solid mechanics. To do this in `4C`, the time integration just performs one step (cf. `NUMSTEP: 1`), the nonlinear solver is limited to one iteration by setting `MAXITER: 1` and is allowd to not converge by setting `DIVERCONT: "continue"`.
+>
+>These are artifical settings for the purpose of this tutorial. They do not serve as a recommendation for any meaningful simulation in `4C`.
+></details>
+
 ## Preliminary Steps
 
 The default input file comes with a direct solver, so you can run it right away. To run it on `<numProc>` MPI ranks, use the following command:
