@@ -10,9 +10,9 @@ The arising linear system of equations exhibits $3x3$ block structure, reading[^
 
 > Again, the exact details of the problem setup are not important for the course of this tutorial and, thus, are omitted for the sake of brevity.
 
-The simulation model defined using the following files:
+The simulation model is defined using the following files:
 
-- `pw.4C.yaml`: simulation parameters and boundary conditions for clamped cantilever beam with endload performing a single solve of the linear sytem
+- `pw.4C.yaml`: simulation parameters and boundary conditions for a pressure wave travelling through an elastic tube
 - `gmres_fsi.xml`: definition of a GMRES solver from Belos (required for iterative solvers throughout the tutorial)
 - `pw.exo`: mesh in binary format
 
@@ -43,7 +43,7 @@ We first study a block-iterative preconditioner implemented via Teko[^3]. Its co
    ></ParameterList>
    >```
    >
-   >In this case, it selects a `Block Gauss-Seidel` approach. Furthermore, it specifies names of lists (`Inverse1`, `Inverse2`, `Inverse3`) provide details on how to approximate the necessary block inverses of the first, second, and third block within the 3x3 block system.
+   >In this case, it selects a `Block Gauss-Seidel` approach. Furthermore, it specifies names of lists (`Inverse1`, `Inverse2`, `Inverse3`) which provide details on how to approximate the necessary block inverses of the first, second, and third block within the 3x3 block system.
    >
    >Then, an approximate inversion of each block is specified in their own sublists. For the solid block (`Inverse1`), this reads:
    >
@@ -63,7 +63,9 @@ We first study a block-iterative preconditioner implemented via Teko[^3]. Its co
    ></ParameterList>
    >```
    >
-   >It uses `MueLu` with an `sa` (smoothed aggregation) algebraic multigrid scheme and provides all other paramters to properly define a MueLu hierharchy. **Note:** This part might look familiar, as it just resembles a "standard" MueLu xml file as you have already seen it in the first part of this turorial, where we have used MueLu for a solid mechanics problem.
+   >It uses `MueLu` with an `sa` (smoothed aggregation) algebraic multigrid scheme and provides all other parameters to properly define a MueLu hierarchy. 
+   >
+   >**Note:** This part might look familiar, as it just resembles a "standard" MueLu xml file as you have already seen it in the first part of this tutorial, where we have used MueLu for a solid mechanics problem.
    >
    >Analogously, sublists `Inverse2` and `Inverse3` define approximate inversions for the fluid and ALE block, respectively.
    >
@@ -74,7 +76,7 @@ We first study a block-iterative preconditioner implemented via Teko[^3]. Its co
    mpirun -np 2 <4Cexe> pw.4C.yaml output
    ```
 
-1. Study the influence of the preconditioner configuration on the number of GMRES iterations and/or runtime  until convergence. Therefore, adapt the preconditoiner settings in `prec_fsi_teko_block_iterative.xml`.
+1. Study the influence of the preconditioner configuration on the number of GMRES iterations and/or runtime  until convergence. Therefore, adapt the preconditioner settings in `prec_fsi_teko_block_iterative.xml`.
 
 ## Step 2: Fully coupled Preconditioner
 
@@ -91,7 +93,7 @@ To study the preconditioner, perform the following steps:
    >
    > MueLu block preconditioners can be defined via MueLu's "advanced" input deck. This details all factories, i.e., building blocks of a multigrid hierarchy in sublists of the xml file. These are then processed by MueLu and stitched together to create a MueLu preconditioner.
    >
-   >- The list `Factories` collects all individual factories. Factories can refer to other factories, e.g., for using the result of factory A as in put for factory B. Therefore, factory A must be defined prior to factory B in the list of all factories. Other than that, the ordering of the factories is arbitrary. In this spirit, aggregation, transfer operators, or smoothers (or any other component of a MueLu hierarhcy) are represented via their own sublist in the `Factories` list.
+   >- The list `Factories` collects all individual factories. Factories can refer to other factories, e.g., for using the result of factory A as input for factory B. Therefore, factory A must be defined prior to factory B in the list of all factories. Other than that, the ordering of the factories is arbitrary. In this spirit, aggregation, transfer operators, or smoothers (or any other component of a MueLu hierarchy) are represented via their own sublist in the `Factories` list.
    >- The list `Hierarchy` defines the actual multigrid hiearchy based on some parameters and the factories from above.
    >
    ></details>
@@ -101,7 +103,7 @@ To study the preconditioner, perform the following steps:
    mpirun -np 2 <4Cexe> pw.4C.yaml output
    ```
 
-1. Study the influence of the preconditioner configuration on the number of GMRES iterations and/or runtime  until convergence. Therefore, adapt the preconditoiner settings in `prec_fsi_teko_block_iterative.xml`. You could change the following components of the preconditioner:
+1. Study the influence of the preconditioner configuration on the number of GMRES iterations and/or runtime  until convergence. Therefore, adapt the preconditioner settings in `prec_fsi_teko_block_iterative.xml`. You could change the following components of the preconditioner:
 
 - Number of sweeps and damping parameter of the block Gauss-Seidel level smoother, cf. sublist `myBlockSmoother`
 - Smoothers for solid, fluid, ale blocks, cf. `mySmooFact1`, `mySmooFact2`, `mySmooFact3`
@@ -109,6 +111,6 @@ To study the preconditioner, perform the following steps:
 Discuss the observations with your colleagues.
 
 [^1]: M. W. Gee, U. Küttler, and W. A. Wall. Truly monolithic algebraic multigrid for fluid–structure interaction. International Journal for Numerical Methods in Engineering, 85(8):987–1016, 2011
-[^2]: M. Mayr, T. Kl¨oppel, W. A. Wall, and M. W. Gee. A Temporal Consistent Monolithic Approach to Fluid–Structure Interaction Enabling Single Field Predictors. SIAM Journal on Scientific Computing, 37(1):B30–B59, 2015
+[^2]: M. Mayr, T. Klöppel, W. A. Wall, and M. W. Gee. A Temporal Consistent Monolithic Approach to Fluid–Structure Interaction Enabling Single Field Predictors. SIAM Journal on Scientific Computing, 37(1):B30–B59, 2015
 [^3]: E. C. Cyr, J. N. Shadid, and R. S. Tuminaro. Teko: A Block Preconditioning Capability with Concrete Example Applications in Navier–Stokes and MHD. SIAM Journal on Scientific Computing, 38(5):S307–S331, 2016
 [^4]: L. Berger-Vergiat, C. A. Glusa, G. Harper, J. J. Hu, M. Mayr, A. Prokopenko, C. M. Siefert, R. S. Tuminaro, and T. A. Wiesner. MueLu User’s Guide. Technical Report SAND2023-12265, Sandia National Laboratories, Albuquerque, NM (USA) 87185, 2023
