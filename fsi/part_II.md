@@ -63,7 +63,7 @@ We first study a block-iterative preconditioner implemented via Teko[^3]. Its co
    ></ParameterList>
    >```
    >
-   >It uses `MueLu` with an `sa` (smoothed aggregation) algebraic multigrid scheme and provides all other parameters to properly define a MueLu hierarchy. 
+   >It uses `MueLu` with an `sa` (smoothed aggregation) algebraic multigrid scheme and provides all other parameters to properly define a MueLu hierarchy.
    >
    >**Note:** This part might look familiar, as it just resembles a "standard" MueLu xml file as you have already seen it in the first part of this tutorial, where we have used MueLu for a solid mechanics problem.
    >
@@ -77,6 +77,8 @@ We first study a block-iterative preconditioner implemented via Teko[^3]. Its co
    ```
 
 1. Study the influence of the preconditioner configuration on the number of GMRES iterations and/or runtime  until convergence. Therefore, adapt the preconditioner settings in `prec_fsi_teko_block_iterative.xml`.
+
+Discuss the observations with your colleagues.
 
 ## Step 2: Fully coupled Preconditioner
 
