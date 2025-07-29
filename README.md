@@ -17,6 +17,8 @@ This tutorial builds upon 4C Multiphysics. It requires access to a build of 4C M
 
 ### Part I: Solving linear systems arising in 3D elasticity
 
+Tutorial steps are described in `solid_mechanics/part_I.md`. The tutorial consists of the following steps:
+
 - Step 1: Iterative Solver without Jacobi preconditioner
 - Step 2: Iterative Solver without Chebyshev preconditioner
 - Step 3: Iterative Solver without ILU preconditioner
@@ -24,6 +26,8 @@ This tutorial builds upon 4C Multiphysics. It requires access to a build of 4C M
 - Step 5: Weak Scaling Study
 
 ### Part II: Solving linear systems arising in 3D fluid/solid interaction
+
+Tutorial steps are described in `fsi/part_II.md`. The tutorial consists of the following steps:
 
 - Step 1: Iterative Solver with block-iterative preconditioner and AMG for block inverses
 - Step 2: Iterative Solver with fully coupled AMG preconditioners
