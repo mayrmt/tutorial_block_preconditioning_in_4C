@@ -15,6 +15,8 @@ This tutorial builds upon 4C Multiphysics. It requires access to a build of 4C M
 
 ## Organization of Course Material
 
+The tutorial consists of two parts. First, we look into linear systems arising from 3D elasticity. Then, we switch over to block systems as they occur in monolithic solvers for fluid/solid interaction.
+
 ### Part I: Solving linear systems arising from 3D elasticity
 
 Tutorial steps are described in `solid_mechanics/part_I.md`. The tutorial consists of the following steps:
