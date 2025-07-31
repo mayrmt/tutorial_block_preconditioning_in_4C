@@ -146,8 +146,8 @@ Study the influence of the following parameters on the number of GMRES iteration
 
 - Configuration of the preconditioner:
 
-  - Number of sweeps: `"relaxation: sweeps"`
-  - Number of sweeps: `"relaxation: damping factor"`
+  - Number of sweeps: `"relaxation: sweeps"` [Range: 1 - 5]
+  - Number of sweeps: `"relaxation: damping factor"` [Range: 0.1 - 1.0]
 
 - Mesh (to be set in `solid.4C.yaml`)
 
@@ -197,7 +197,7 @@ Now, run the example and watch the convergence behavior of the iterative solver.
 
 - Configuration of the preconditioner:
 
-  - Polynomial degree: `"chebyshev: degree"`
+  - Polynomial degree: `"chebyshev: degree"` [Range: 1 - 6]
 
 - Mesh (to be set in `solid.4C.yaml`)
 
@@ -246,8 +246,8 @@ Now, run the example and watch the convergence behavior of the iterative solver.
 
 - Configuration of the preconditioner:
 
-  - Overlap at processor boundaries: `"Overlap"` defines the overlap at processor boundaries (`0` = no overlap, larger values results in larger overlap)
-  - Fill-in: `"fact: level-of-fill"` defines the allowed fill-in (larger values result in a better approximation, however a more expensive setup procedure)
+  - Overlap at processor boundaries: `"Overlap"` defines the overlap at processor boundaries (`0` = no overlap, larger values results in larger overlap) [Range: 0 - 2]
+  - Fill-in: `"fact: level-of-fill"` defines the allowed fill-in (larger values result in a better approximation, however a more expensive setup procedure) [Range: 0 - 3]
 
 - Mesh (to be set in `solid.4C.yaml`)
 
@@ -296,7 +296,7 @@ Now, run the example and watch the convergence behavior of the iterative solver.
 
 - Configuration of the preconditioner:
 
-  - Polynomial degree of the Chebyshev level smoother: `"chebyshev: degree"`
+  - Polynomial degree of the Chebyshev level smoother: `"chebyshev: degree"` [Range: 0 - 6]
 
 - Mesh (to be set in `solid.4C.yaml`)
 
