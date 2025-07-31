@@ -19,22 +19,22 @@ SOLVER 1:
 SOLVER 2:
   NAME: "GMRES with Jacobi from Ifpack"
   SOLVER: "Belos"
-  SOLVER_XML_FILE: "gmres_solid.xml"
+  SOLVER_XML_FILE: "solid_gmres.xml"
   IFPACK_XML_FILE: "prec_solid_ifpack_Jacobi.xml"
 SOLVER 3:
   NAME: "GMRES with Chebyshev from Ifpack"
   SOLVER: "Belos"
-  SOLVER_XML_FILE: "gmres_solid.xml"
+  SOLVER_XML_FILE: "solid_gmres.xml"
   IFPACK_XML_FILE: "prec_solid_ifpack_Chebyshev.xml"
 SOLVER 4:
   NAME: "GMRES with ILU from Ifpack"
   SOLVER: "Belos"
-  SOLVER_XML_FILE: "gmres_solid.xml"
+  SOLVER_XML_FILE: "solid_gmres.xml"
   IFPACK_XML_FILE: "prec_solid_ifpack_ILU.xml"
 SOLVER 5:
   NAME: "GMRES with SA-AMG from MueLu"
   SOLVER: "Belos"
-  SOLVER_XML_FILE: "gmres_solid.xml"
+  SOLVER_XML_FILE: "solid_gmres.xml"
   AZPREC: "MueLu"
   MUELU_XML_FILE: "prec_solid_muelu_sa_amg.xml"
 
