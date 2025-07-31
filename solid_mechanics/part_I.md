@@ -6,7 +6,15 @@ $$Ax = b$$
 
 arising from the finite element discretization of a cantilever beam using solid elements.
 
-> The exact details of the problem setup are not important for the course of this tutorial and, thus, are omitted for the sake of brevity.
+## Problem Setup
+
+> The exact details of the problem setup are not important for the course of this tutorial and, thus, are only summarized briefly.
+
+The problem consists of a cantilever beam with dimensions $1 x\times 1 \times 5$. It is fully clamped at $z=0$. The surface at $z=5$ is subject to a Dirichlet boundary condition, prescibing a displacement of $[0.01, 0.01, 0.01]$ in $[x, y, z]$ directions, respectively. A St.-Venant-Kirchhoff material with a Young's modulus of $1$ and a Poisson's ration of $0.3$ is used in combination with linear kinematics. The problem is configured to only solve a single linear system.
+
+The geometry (with "mesh 1" defined below) looks as follows:
+
+![Geometry and mesh of a cantilever beam](solid_mesh_screenshot.png)
 
 The simulation model with three possible meshes is defined using the following files:
 
@@ -37,7 +45,7 @@ They will be used and modified throughout this tutorial.
 ><details>
 ><summary>Remark: choice of input parameters</summary>
 >
->Since this tutorial focuses on preconditioning of the linear solver, we are not really interested in solving an actual solid mechanics problem, but only want to solve a single linear system arising from solid mechanics. To do this in `4C`, the time integration just performs one step (cf. `NUMSTEP: 1`), the nonlinear solver is limited to one iteration by setting `MAXITER: 1` and is allowd to not converge by setting `DIVERCONT: "continue"`.
+>Since this tutorial focuses on preconditioning of the linear solver, we are not really interested in solving an actual solid mechanics problem, but only want to solve a single linear system arising from solid mechanics. To do this in `4C`, the time integration just performs one step (cf. `NUMSTEP: 1`), the nonlinear solver is limited to one iteration by setting `MAXITER: 1`. Nonlinear solver tolerances are chosen very loosely, such that the nonlinear solver assumes convergence after one step.
 >
 >These are artifical settings for the purpose of this tutorial. They do not serve as a recommendation for any meaningful simulation in `4C`.
 ></details>
@@ -80,6 +88,9 @@ STRUCTURAL DYNAMIC:
   NUMSTEP: 1
   MAXTIME: 1
   MAXITER: 1
+  RESULTSEVERY: 0
+  RESTARTEVERY: 0
+  NORMCOMBI_RESFDISP: "Or"
   DIVERCONT: "continue"
   LINEAR_SOLVER: 2
 ```
@@ -173,6 +184,9 @@ STRUCTURAL DYNAMIC:
   NUMSTEP: 1
   MAXTIME: 1
   MAXITER: 1
+  RESULTSEVERY: 0
+  RESTARTEVERY: 0
+  NORMCOMBI_RESFDISP: "Or"
   DIVERCONT: "continue"
   LINEAR_SOLVER: 3
 ```
@@ -219,6 +233,9 @@ STRUCTURAL DYNAMIC:
   NUMSTEP: 1
   MAXTIME: 1
   MAXITER: 1
+  RESULTSEVERY: 0
+  RESTARTEVERY: 0
+  NORMCOMBI_RESFDISP: "Or"
   DIVERCONT: "continue"
   LINEAR_SOLVER: 4
 ```
@@ -266,6 +283,9 @@ STRUCTURAL DYNAMIC:
   NUMSTEP: 1
   MAXTIME: 1
   MAXITER: 1
+  RESULTSEVERY: 0
+  RESTARTEVERY: 0
+  NORMCOMBI_RESFDISP: "Or"
   DIVERCONT: "continue"
   LINEAR_SOLVER: 5
 ```
